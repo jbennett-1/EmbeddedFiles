@@ -3,7 +3,6 @@ LD := aarch64-none-elf-ld
 OBJDUMP := aarch64-none-elf-objdump
 OBJCOPY := aarch64-none-elf-objcopy
 CONFIGS := -DCONFIG_HEAP_SIZE=4096
-//gcc-arm-none-eabi
 
 CFLAGS := -O2 -ffreestanding -fno-pie -fno-stack-protector -g3 -Wall -mgeneral-regs-only -ffp-contract=off -Iinclude/  $(CONFIGS)
 
@@ -44,13 +43,12 @@ clean:
 	rm -f kernel8.elf
 	killall screen
 
-//replace machine with cortex M4 chip
 debug:
-	screen -S qemu-x86_64 -d -m ./qemu-system-arm -machine raspi3 -kernel kernel8.img -hda rootfs.img -S -s -serial null -serial stdio -monitor none -nographic -k en-us 
+	screen -S qemu-x86_64 -d -m ./qemu-system-aarch64 -machine lm3s811vb -kernel kernel8.img -hda rootfs.img -S -s -serial null -serial stdio -monitor none -nographic -k en-us 
 	TERM=xterm aarch64-none-elf-gdb -x gdb_init_prot_mode.txt
-//aarch64 -> gcc-arm-none-eabi ?
+
 run:
-	./qemu-system-arm -machine raspi3 -kernel kernel8.img -hda rootfs.img -serial null -serial stdio -monitor none -nographic -k en-us
+	./qemu-system-aarch64 -machine lm3s811vb -kernel kernel8.img -hda rootfs.img -serial null -serial stdio -monitor none -nographic -k en-us
 
 disassemble:
 	$(OBJDUMP) -d kernel8.elf
