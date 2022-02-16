@@ -51,6 +51,7 @@ debug:
 //changes: path, machine, cpu
 run:
 	./qemu-system-arm -machine lm3s811vb -cpu cortex-m4 -kernel kernel8.img -hda rootfs.img -serial null -serial stdio -monitor none -nographic -k en-us
+//add --preconfig?
 
 disassemble:
 	$(OBJDUMP) -d kernel8.elf
