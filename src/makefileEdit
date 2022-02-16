@@ -1,8 +1,9 @@
-CC := aarch64-none-elf-gcc
-LD := aarch64-none-elf-ld
-OBJDUMP := aarch64-none-elf-objdump
-OBJCOPY := aarch64-none-elf-objcopy
+CC := arm-none-eabi-gcc
+LD := arm-none-eabi-ld
+OBJDUMP := arm-none-eabi-objdump
+OBJCOPY := arm-none-eabi-objcopy
 CONFIGS := -DCONFIG_HEAP_SIZE=4096
+//changes: aarch to arm
 
 CFLAGS := -O2 -ffreestanding -fno-pie -fno-stack-protector -g3 -Wall -mgeneral-regs-only -ffp-contract=off -Iinclude/  $(CONFIGS)
 
@@ -44,11 +45,12 @@ clean:
 	killall screen
 
 debug:
-	screen -S qemu-x86_64 -d -m ./qemu-system-aarch64 -machine lm3s811vb -kernel kernel8.img -hda rootfs.img -S -s -serial null -serial stdio -monitor none -nographic -k en-us 
-	TERM=xterm aarch64-none-elf-gdb -x gdb_init_prot_mode.txt
+	screen -S qemu-x86_64 -d -m ./qemu-system-arm -machine lm3s811vb -cpu cortex-m4 -kernel kernel8.img -hda rootfs.img -S -s -serial null -serial stdio -monitor none -nographic -k en-us 
+	TERM=xterm arm-none-elf-gdb -x gdb_init_prot_mode.txt
 
+//changes: path, machine, cpu
 run:
-	./qemu-system-aarch64 -machine lm3s811vb -kernel kernel8.img -hda rootfs.img -serial null -serial stdio -monitor none -nographic -k en-us
+	./qemu-system-arm -machine lm3s811vb -cpu cortex-m4 -kernel kernel8.img -hda rootfs.img -serial null -serial stdio -monitor none -nographic -k en-us
 
 disassemble:
 	$(OBJDUMP) -d kernel8.elf
