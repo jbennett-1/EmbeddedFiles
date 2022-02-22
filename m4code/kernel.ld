@@ -25,7 +25,7 @@
  *
  * \asf_license_stop
  *
- */
+ **/
 
 
 OUTPUT_FORMAT("elf32-littlearm", "elf32-littlearm", "elf32-littlearm")
@@ -35,8 +35,8 @@ SEARCH_DIR(.)
 /* Memory Spaces Definitions */
 MEMORY
 {
-  rom      (rx)  : ORIGIN = 0x0000000, LENGTH = 0xfffff
-  ram      (rwx) : ORIGIN = 0x20000000, LENGTH = 0x2001ffff
+  rom      (rx)  : ORIGIN = 0x0000000, LENGTH = 0x1fffffff
+  ram      (rwx) : ORIGIN = 0x20000000, LENGTH = 0x3fffffff
 }
 
 /* The stack size used by the application. NOTE: you need to adjust according to your application. */

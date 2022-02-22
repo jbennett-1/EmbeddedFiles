@@ -1,7 +1,7 @@
 /* test program */
 
 int main(){
-	int a,b,c;
+	unsigned int a,b,c;
 	a=1;
 	b=2;
 	c=0;
@@ -24,7 +24,7 @@ void dummyvec() {
 
 void _start();
 __attribute__ ((section(".vectors")))
-void *VectorTable[]={0x20000400,
+void *VectorTable[]={0x20005000,
 	             _start,
                      dummyvec,
                      dummyvec,

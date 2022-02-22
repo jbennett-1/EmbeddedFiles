@@ -43,12 +43,12 @@ debug:
 #	screen -S openocd -d -m openocd -f /usr/share/openocd/scripts/board/atmel_same70_xplained.cfg
 #	gdb-multiarch kernel8.elf
 #	screen -S qemu-x86_64 -d -m ./qemu-system-arm -machine lm3s811vb -cpu cortex-m4 -kernel kernel8.img -hda rootfs.img -S -s -serial null -serial stdio -monitor none -nographic -k en-us 
-	screen -S qemu-x86_64 -d -m qemu-system-arm -machine lm3s6965evb -cpu cortex-m3 -kernel kernel8.img -D ./log.txt -S -s -monitor stdio -preconfig
+	screen -S qemu-x86_64 -d -m qemu-system-arm -machine lm3s6965evb -cpu cortex-m3 -kernel kernel8.img -S -s -monitor stdio 
 	TERM=xterm gdb-multiarch -x gdb_init_prot_mode.txt
 
 
 run:
-	qemu-system-arm -machine lm3s6965evb -cpu cortex-m3 -kernel kernel8.img -D ./log.txt -serial null -monitor stdio -preconfig 
+	qemu-system-arm -machine lm3s6965evb -cpu cortex-m3 -kernel kernel8.img -serial null -monitor stdio 
 
 disassemble:
 	$(OBJDUMP) -d kernel8.elf
