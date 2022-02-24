@@ -1,13 +1,17 @@
 /* test program */
+typedef struct 
+{
+	volatile unsigned long CTRL;
+	volatile unsigned long LOAD;
+	volatile unsigned long VAL;
+	volatile unsigned long CALIB; 
+} SysTick_Type;
 
-int main(){
-	unsigned int a,b,c;
-	a=1;
-	b=2;
-	c=0;
-	c=a+b;
+#define SysTick((SysTick_Type* )*0xE000E010) /*SysTick struct */
 
-}
+SysTick->VAL=0x0;
+SysTick->LOAD=0xFFFFF; //clock cycles/reload val
+SysTick->CTRL=0x5;
 
 
 #if 0
