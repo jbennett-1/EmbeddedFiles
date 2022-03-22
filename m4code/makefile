@@ -12,7 +12,6 @@ SDIR = src
 
 OBJS = \
 	test.o \
-	junk.o \
 
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
@@ -24,20 +23,14 @@ $(ODIR)/%.o: $(SDIR)/%.s
 	$(CC) $(CFLAGS) -c -g -o $@ $^
 
 
-all: bin rootfs.img
+all: bin
 
 bin: $(OBJ)
 	$(LD) obj/* -Tkernel.ld -o kernel8.img -e _start
-	cp kernel8.img kernel8.elf
-	$(OBJCOPY) -O binary kernel8.img
 
 clean:
 	rm -f obj/*
-	rm -f rootfs.img
-	rm -f rootfs.img
-	rm -f kernel8.img
 	rm -f kernel8.elf
-	killall screen
 
 debug:
 	screen -S openocd -d -m openocd -f /usr/share/openocd/scripts/board/atmel_same54_xplained.cfg
@@ -53,11 +46,4 @@ run:
 disassemble:
 	$(OBJDUMP) -d kernel8.elf
 
-rootfs.img:
-	dd if=/dev/zero of=rootfs.img bs=1M count=16
-	mkfs.fat -F16 rootfs.img
-	sudo mount rootfs.img /mnt
-	sudo mkdir -p /mnt/boot/firmware
-	sudo mkdir /mnt/bin
-	sudo mkdir /mnt/etc
-	sudo umount /mnt
+

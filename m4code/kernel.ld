@@ -116,24 +116,6 @@ SECTIONS
         _erelocate = .;
     } > ram
 
-    .bkupram (NOLOAD):
-    {
-        . = ALIGN(8);
-        _sbkupram = .;
-        *(.bkupram .bkupram.*);
-        . = ALIGN(8);
-        _ebkupram = .;
-    } > bkupram
-
-    .qspi (NOLOAD):
-    {
-        . = ALIGN(8);
-        _sqspi = .;
-        *(.qspi .qspi.*);
-        . = ALIGN(8);
-        _eqspi = .;
-    } > qspi
-
     /* .bss section which is used for uninitialized data */
     .bss (NOLOAD) :
     {
