@@ -11,9 +11,10 @@ CFLAGS += -I/home/juliabennett/Desktop/OBG/m4code/Include
 ODIR = obj
 SDIR = src
 
-OBJS = test.o 
-	
+OBJS = test.o 	
 OBJS += /home/juliabennett/Desktop/OBG/m4code/Startup
+
+CMSIS = /home/juliabennett/Desktop/OBG/m4code
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
 
@@ -28,19 +29,20 @@ all: bin
 
 bin: $(OBJ)
 	$(LD) obj/* -Tkernel.ld -o kernel8.img -e _start
+	cp kernel8.img kernel8.elf
+	$(OBJCOPY) -O binary kernel8.img
 
 clean:
 	rm -f obj/*
 	rm -f kernel8.elf
 
 debug:
-	screen -S openocd -d -m openocd -f /usr/share/openocd/scripts/board/atmel_same54_xplained.cfg
+	openocd -d -m openocd -f /usr/share/openocd/scripts/board/atmel_same54_xplained.cfg
 	gdb-multiarch kernel8.elf 
 	TERM=xterm gdb-multiarch -x gdb_init_prot_mode.txt
 
-
 run:
-	screen -S openocd -d -m openocd -f /usr/share/openocd/scripts/board/atmel_same54_explained.cfg -kernel kernel8.img -serial null -monitor stdio 
+	openocd -d -m openocd -f /usr/share/openocd/scripts/board/atmel_same54_explained.cfg -kernel kernel8.img -serial null -monitor stdio 
 
 disassemble:
 	$(OBJDUMP) -d kernel8.elf
