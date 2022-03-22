@@ -1,18 +1,19 @@
 CC := arm-none-eabi-gcc
 LD := arm-none-eabi-ld
+SIZE := arm-none-eabi-size
 OBJDUMP := arm-none-eabi-objdump
 OBJCOPY := arm-none-eabi-objcopy
 CONFIGS := -DCONFIG_HEAP_SIZE=4096
 
 CFLAGS := -O0 -ffreestanding -fno-pie -fno-stack-protector -g3 -march=armv7-m -mthumb -Wall -mgeneral-regs-only -ffp-contract=off -Iinclude/  $(CONFIGS)
-
+CFLAGS += -I/home/juliabennett/Desktop/OBG/m4code/Include
 
 ODIR = obj
 SDIR = src
 
-OBJS = \
-	test.o \
-
+OBJS = test.o 
+	
+OBJS += /home/juliabennett/Desktop/OBG/m4code/Startup
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
 
@@ -34,14 +35,12 @@ clean:
 
 debug:
 	screen -S openocd -d -m openocd -f /usr/share/openocd/scripts/board/atmel_same54_xplained.cfg
-#	gdb-multiarch kernel8.elf
-#	screen -S qemu-x86_64 -d -m ./qemu-system-arm -machine lm3s811vb -cpu cortex-m4 -kernel kernel8.img -hda rootfs.img -S -s -serial null -serial stdio -monitor none -nographic -k en-us 
-#	screen -S qemu-x86_64 -d -m qemu-system-arm -machine lm3s6965evb -cpu cortex-m3 -kernel kernel8.img -S -s -monitor stdio 
+	gdb-multiarch kernel8.elf 
 	TERM=xterm gdb-multiarch -x gdb_init_prot_mode.txt
 
 
 run:
-	qemu-system-arm -machine lm3s6965evb -cpu cortex-m3 -kernel kernel8.img -serial null -monitor stdio 
+	screen -S openocd -d -m openocd -f /usr/share/openocd/scripts/board/atmel_same54_explained.cfg -kernel kernel8.img -serial null -monitor stdio 
 
 disassemble:
 	$(OBJDUMP) -d kernel8.elf
