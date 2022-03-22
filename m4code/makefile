@@ -11,10 +11,10 @@ CFLAGS += -I/home/juliabennett/Desktop/OBG/m4code/Include
 ODIR = obj
 SDIR = src
 
-OBJS = test.o 	
-OBJS += /home/juliabennett/Desktop/OBG/m4code/Startup
+OBJS = \
+	startup_ARMCM7.o \
+	system_ARMCM7.o \
 
-CMSIS = /home/juliabennett/Desktop/OBG/m4code
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
 
@@ -28,7 +28,7 @@ $(ODIR)/%.o: $(SDIR)/%.s
 all: bin
 
 bin: $(OBJ)
-	$(LD) obj/* -Tkernel.ld -o kernel8.img -e _start
+	$(LD) obj/* -Tgcc_arm.ld -o kernel8.img -e _start
 	cp kernel8.img kernel8.elf
 	$(OBJCOPY) -O binary kernel8.img
 
