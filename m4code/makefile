@@ -25,7 +25,7 @@ $(ODIR)/%.o: $(SDIR)/%.s
 all: bin
 
 bin: $(OBJ)
-	$(LD) obj/* -Tgcc_arm.ld -o kernel8.img -e _start
+	$(LD) obj/* -Tgcc_arm.ld -o kernel8.img 
 	cp kernel8.img kernel8.elf
 	$(OBJCOPY) -O binary kernel8.img
 
