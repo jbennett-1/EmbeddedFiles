@@ -1,7 +1,7 @@
 /**************************************************************************//**
- * @file     ARMCM7.h
+ * @file     ARMCM7_DP.h
  * @brief    CMSIS Core Peripheral Access Layer Header File for
- *           ARMCM7 Device (configured for CM7 without FPU)
+ *           ARMCM7 Device (configured for CM7 with double precision FPU)
  * @version  V5.3.2
  * @date     27. March 2020
  ******************************************************************************/
@@ -23,8 +23,8 @@
  * limitations under the License.
  */
 
-#ifndef ARMCM7_H
-#define ARMCM7_H
+#ifndef ARMCM7_DP_H
+#define ARMCM7_DP_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -90,12 +90,12 @@ typedef enum IRQn
 
 /* --------  Configuration of Core Peripherals  ----------------------------------- */
 #define __CM7_REV                 0x0000U   /* Core revision r0p0 */
-#define __MPU_PRESENT             0U        /* MPU present */
+#define __MPU_PRESENT             1U        /* MPU present */
 #define __VTOR_PRESENT            1U        /* VTOR present */
 #define __NVIC_PRIO_BITS          3U        /* Number of Bits used for Priority Levels */
 #define __Vendor_SysTickConfig    0U        /* Set to 1 if different SysTick Config is used */
-#define __FPU_PRESENT             0U        /* no FPU present */
-#define __FPU_DP                  0U        /* unused */
+#define __FPU_PRESENT             1U        /* FPU present */
+#define __FPU_DP                  1U        /* double precision FPU */
 #define __ICACHE_PRESENT          1U        /* Instruction Cache present */
 #define __DCACHE_PRESENT          1U        /* Data Cache present */
 #define __DTCM_PRESENT            1U        /* Data Tightly Coupled Memory present */
@@ -129,4 +129,4 @@ typedef enum IRQn
 }
 #endif
 
-#endif  /* ARMCM7_H */
+#endif  /* ARMCM7_DP_H */

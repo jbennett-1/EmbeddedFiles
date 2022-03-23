@@ -13,6 +13,8 @@ SDIR = src
 
 OBJS = \
 	startup_ARMCM7.o \
+	main.o \
+	system_ARMCM7.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
 
