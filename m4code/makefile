@@ -22,7 +22,6 @@ $(ODIR)/%.o: $(SDIR)/%.c
 $(ODIR)/%.o: $(SDIR)/%.s
 	$(CC) $(CFLAGS) -c -g -o $@ $^
 
-
 all: bin
 
 bin: $(OBJ)

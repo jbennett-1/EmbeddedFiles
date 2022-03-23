@@ -28,9 +28,9 @@
  // #include "ARMCM7_SP.h"
 //#elif defined (ARMCM7_DP)
 // #include "ARMCM7_DP.h"
-#else
-  #error device not specified!
-#endif
+//#else
+ // #error device not specified!
+//#endif
 
 /*----------------------------------------------------------------------------
   External References
