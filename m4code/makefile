@@ -36,12 +36,12 @@ clean:
 	rm -f kernel8.elf
 
 debug:
-	openocd -d -m openocd -f /usr/share/openocd/scripts/board/atmel_same54_xplained.cfg
-	gdb-multiarch kernel8.elf 
+	screen -S openocd -d -m openocd -f ~/Desktop/openocd/tcl/board/atmel_same70_xplained.cfg
+	#gdb-multiarch kernel8.elf 
 	TERM=xterm gdb-multiarch -x gdb_init_prot_mode.txt
 
 run:
-	openocd -d -m openocd -f /usr/share/openocd/scripts/board/atmel_same54_explained.cfg -kernel kernel8.img -serial null -monitor stdio 
+	screen -S openocd -d -m openocd -f /usr/share/openocd/scripts/board/atmel_same54_explained.cfg -kernel kernel8.img -serial null -monitor stdio 
 
 disassemble:
 	$(OBJDUMP) -d kernel8.elf
